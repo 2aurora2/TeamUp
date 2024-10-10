@@ -34,6 +34,7 @@
                 v-model="uploadDialogVisible"
                 title="上传获奖经历"
                 width="500"
+                destroy-on-close
         >
             <el-form
                     :label-position="labelPosition"
@@ -103,7 +104,10 @@ const userStore = useUserStore();
 const getUserCardInfo = async (userId: number) => {
     // 获取当前router对应用户信息
     user.value = await getUserInfoById(userId);
-    if (!user.value) ErrorNotice('获取用户信息失败！');
+    if (!user.value) {
+        ErrorNotice('获取用户信息失败！');
+        router.push('/404');
+    }
     // 判断是否为用户自己
     isOwn.value = userStore.user.id === user.value?.id;
 }

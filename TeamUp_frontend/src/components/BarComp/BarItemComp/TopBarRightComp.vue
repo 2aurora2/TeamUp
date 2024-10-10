@@ -15,7 +15,7 @@
                         </el-dropdown-item>
                         <el-dropdown-item
                                 v-if="userStore.roleList.includes(1) || userStore.roleList.includes(2)"
-                                @click="router.push('#');SuccessNotice('欢迎来到后台管理系统！')"
+                                @click="router.push('/admin/profile');SuccessNotice('欢迎来到后台管理！')"
                         >
                             <span>后台管理</span>
                             <span></span>

@@ -57,12 +57,6 @@ import FootBarComp from "@/components/BarComp/FootBarComp.vue";
         padding-right: 30px;
     }
 
-    .el-main {
-        flex: 1;
-        padding: 0;
-        margin: 0;
-    }
-
     .el-footer {
         height: fit-content;
         border-top: 1px solid #dcdcdc;
@@ -70,7 +64,7 @@ import FootBarComp from "@/components/BarComp/FootBarComp.vue";
 }
 
 /**消除横向滚动条**/
-:deep(.el-scrollbar__bar.is-horizontal){
+:deep(.el-scrollbar__bar.is-horizontal) {
     height: 0 !important;
 }
 </style>

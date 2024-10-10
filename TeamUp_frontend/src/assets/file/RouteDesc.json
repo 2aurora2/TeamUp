@@ -4,5 +4,8 @@
   "Register": "注册",
   "NotFound": "未知页面",
   "AboutUs": "关于我们",
-  "PersonCenter": "用户信息"
+  "PersonCenter": "用户信息",
+  "AdminProfile": "管理员信息",
+  "MatchManage": "比赛管理",
+  "MatchSummary": "比赛概览"
 }

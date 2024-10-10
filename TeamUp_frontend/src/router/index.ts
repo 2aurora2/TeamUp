@@ -31,6 +31,40 @@ const routes = [
         name: 'AboutUs',
         component: () => import('@/views/AboutUsView.vue')
     },
+    {
+        path: '/match/summary',
+        name: 'MatchSummary',
+        component: () => import('@/views/MatchViews/MatchSummaryView.vue'),
+        meta: {
+            requireLoginAuth: true
+        }
+    },
+    {
+        path: '/admin',
+        name: 'Administer',
+        component: () => import('@/views/BackHomeView.vue'),
+        redirect: () => '/admin/profile',
+        children: [
+            {
+                path: 'profile',
+                name: 'AdminProfile',
+                component: () => import('@/views/AdminViews/AdminProfileView.vue'),
+                meta: {
+                    requireLoginAuth: true,
+                    requireAdminAuth: true
+                }
+            },
+            {
+                path: 'match/manage',
+                name: 'MatchManage',
+                component: () => import('@/views/AdminViews/MatchManageView.vue'),
+                meta: {
+                    requireLoginAuth: true,
+                    requireAdminAuth: true
+                }
+            }
+        ]
+    },
     // 无匹配页面则跳转到404
     {
         path: '/:pathMatch(.*)*',

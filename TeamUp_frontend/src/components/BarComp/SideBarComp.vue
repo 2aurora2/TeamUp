@@ -7,41 +7,29 @@
                     :router="true"
                     @select="handleSelect"
             >
-                <el-menu-item :index="isAdmin?adminProPath:teachProPath">
+                <el-menu-item index="/admin/profile">
                     <el-icon>
                         <UserFilled/>
                     </el-icon>
                     <span>个人信息</span>
                 </el-menu-item>
-                <el-menu-item index="/admin/audit" v-if="isAdmin">
+                <el-menu-item index="/admin/match/manage" v-if="isSuperAdmin">
                     <el-icon>
                         <Checked/>
                     </el-icon>
-                    <span>审核管理</span>
+                    <span>比赛管理</span>
                 </el-menu-item>
-                <el-menu-item index="/admin/apply" v-if="isAdmin">
+                <el-menu-item index="/admin/post/manage">
                     <el-icon>
                         <ChromeFilled/>
                     </el-icon>
-                    <span>申请管理</span>
+                    <span>帖子管理</span>
                 </el-menu-item>
-                <el-menu-item index="/admin/user/manage" v-if="isAdmin">
+                <el-menu-item index="/admin/user/manage">
                     <el-icon>
                         <HelpFilled/>
                     </el-icon>
                     <span>用户管理</span>
-                </el-menu-item>
-                <el-menu-item index="/teach/class/manage" v-if="isTeach">
-                    <el-icon>
-                        <HelpFilled/>
-                    </el-icon>
-                    <span>班级管理</span>
-                </el-menu-item>
-                <el-menu-item index="/teach/homework/manage" v-if="isTeach">
-                    <el-icon>
-                        <Checked/>
-                    </el-icon>
-                    <span>作业管理</span>
                 </el-menu-item>
             </el-menu>
         </el-col>
@@ -56,12 +44,10 @@ import router from "@/router";
 const props = defineProps({
     roleList: Array<number>
 });
-const isAdmin = ref(false);
-const isTeach = ref(false);
-const adminProPath = ref('/admin/profile');
-const teachProPath = ref('/teach/profile');
 
-const defaultActive = ref('')
+const isSuperAdmin = ref(false);
+
+const defaultActive = ref('/admin/profile');
 
 const handleSelect = (key: string) => {
     defaultActive.value = key;
@@ -70,30 +56,12 @@ const handleSelect = (key: string) => {
 }
 
 watch(() => router.currentRoute.value.fullPath, (newP, _) => {
-    if(newP.includes('admin') && !isAdmin.value){
-        isAdmin.value = true;
-        isTeach.value = false;
-        defaultActive.value = adminProPath.value;
-    }
-    else if(newP.includes('teach') && !isTeach.value){
-        isAdmin.value = false;
-        isTeach.value = true;
-        defaultActive.value = teachProPath.value;
-    }
+    defaultActive.value = newP;
 })
 
 onMounted(() => {
-    if (router.currentRoute.value.fullPath.includes('admin') && (props.roleList?.includes(1) || props.roleList?.includes(2))) {
-        isAdmin.value = true;
-        isTeach.value = false;
-    }
-    if (router.currentRoute.value.fullPath.includes('teach') && (props.roleList?.includes(3))) {
-        isTeach.value = true;
-        isAdmin.value = false;
-    }
-
+    if (props.roleList?.includes(1)) isSuperAdmin.value = true;
     if (localStorage.getItem('defaultPath') != null) defaultActive.value = <string>localStorage.getItem('defaultPath');
-    else defaultActive.value = isAdmin.value ? '/admin/profile' : '/teach/profile';
     router.push(defaultActive.value);
 })
 
@@ -105,6 +73,7 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .tac {
+    width: 15%;
     height: 100%;
     font-family: 幼圆, serif;
 

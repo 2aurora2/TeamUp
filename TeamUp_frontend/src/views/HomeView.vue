@@ -1,9 +1,9 @@
 <template>
     <el-container>
         <notice-card-comp/>
-        <div class="reason-part col-flex">
+        <div class="reason-part col-flex part">
             <p>为什么选择TeamUp?</p>
-            <div class="reason-cards">
+            <div class="reason-cards cards">
                 <reason-card-comp
                         v-for="(item,index) in reasons"
                         :key="index"
@@ -13,12 +13,32 @@
                 />
             </div>
         </div>
+        <div class="recent-match-part col-flex part">
+            <p>近期比赛</p>
+            <el-empty v-if="matchList.length === 0" description="暂无比赛"/>
+            <el-link type="primary" @click="router.push('/match/summary')">查看全部</el-link>
+            <div class="recent-match-cards cards">
+                <recent-match-card
+                        v-for="(item,index) in matchList"
+                        :key="index"
+                        :title="item.title"
+                        :month="item.month"
+                        :tag-list="item.tagList"
+                />
+            </div>
+        </div>
     </el-container>
 </template>
 
 <script setup lang="ts">
 import NoticeCardComp from "@/components/HomeComp/NoticeCardComp.vue";
 import ReasonCardComp from "@/components/HomeComp/ReasonCardComp.vue";
+import RecentMatchCard from "@/components/HomeComp/RecentMatchCard.vue";
+import {onMounted, ref} from "vue";
+import {MatchItem} from "@/interface/match.ts";
+import {ErrorNotice} from "@/utils/Notification.ts";
+import api from "@/api";
+import router from "@/router";
 
 const reasons = [
     {
@@ -37,6 +57,28 @@ const reasons = [
         desc: '竞赛经验的分享，助你在竞赛中脱颖而出，赢得荣誉'
     }
 ];
+const matchList = ref<MatchItem[]>([]);
+
+onMounted(async () => {
+    try {
+        const {data: res} = await api.matchApi.getRecentMatch();
+        if (res.code === 200) {
+            const itemList = res.data.matches;
+            const tagList = res.data.tagList;
+            const itemResultList: MatchItem[] = [];
+            for (let i = 0; i < itemList.length; ++i) {
+                let temp: MatchItem = {
+                    ...itemList[i],
+                    tagList: tagList[i]
+                };
+                itemResultList.push(temp);
+            }
+            matchList.value = itemResultList;
+        } else ErrorNotice(res.message);
+    } catch (e: any) {
+        ErrorNotice(e.response.data.message);
+    }
+})
 </script>
 
 <style scoped lang="scss">
@@ -48,7 +90,7 @@ const reasons = [
     flex-direction: column !important;
     align-items: center;
 
-    .reason-part {
+    .part {
         width: 100%;
         background-color: #ffffff;
         margin-top: 30px;
@@ -61,7 +103,7 @@ const reasons = [
             font-weight: 1000;
         }
 
-        .reason-cards {
+        .cards {
             width: 100%;
             display: flex;
             flex-direction: row;

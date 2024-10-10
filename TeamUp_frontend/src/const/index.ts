@@ -6,12 +6,13 @@ const ENTRY_ROUTES = ['/login', '/register']
 const NOT_NEED_TOKEN_URL = [
     "/register",
     "/login",
+    "/match/get/recent"
 ]
 
 const ROUTE_DESC: RouteDesc = routeDesc as RouteDesc
 
 const DEFAULT_USER: User = {
-    avatar: "", email: "", grade: "", id: 0, is_banned: 0, password: "", school: "", username: ""
+    avatar: "", email: "", grade: "", id: 0, is_banned: 0, password: "", major: "", username: ""
 }
 
 export default {
