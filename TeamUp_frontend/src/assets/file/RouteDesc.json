@@ -7,5 +7,12 @@
   "PersonCenter": "用户信息",
   "AdminProfile": "管理员信息",
   "MatchManage": "比赛管理",
-  "MatchSummary": "比赛概览"
+  "MatchSummary": "比赛概览",
+  "PostCreate": "帖子创建",
+  "PostDetails": "帖子详情",
+  "RecruitmentLobby": "招募大厅",
+  "ExperienceShare": "经验分享",
+  "PostEdit": "帖子编辑",
+  "PostManage": "帖子管理",
+  "UserManage": "用户管理"
 }

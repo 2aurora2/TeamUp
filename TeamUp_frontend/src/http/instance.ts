@@ -4,7 +4,7 @@ import router from "@/router";
 
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_PROXY_URL,
-    timeout: 10 * 1000,
+    timeout: 30 * 1000,
     headers: {
         'Content-Type': 'application/json',
     }
@@ -25,7 +25,6 @@ axiosInstance.interceptors.request.use(
             return config;
         }
         config.headers['token'] = `${userStore.token}`;
-
         return config;
     },
     (err) => {

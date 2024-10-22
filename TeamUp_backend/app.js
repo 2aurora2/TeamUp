@@ -9,6 +9,8 @@ var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 var uploadRouter = require('./routes/upload');
 var awardRouter = require('./routes/award');
+var matchRouter = require('./routes/match');
+var postRouter = require('./routes/post');
 
 var app = express();
 
@@ -27,6 +29,8 @@ app.use('/', indexRouter);
 app.use('/upload', uploadRouter);
 app.use('/user', userRouter);
 app.use('/award', awardRouter);
+app.use('/match', matchRouter);
+app.use('/post', postRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -42,10 +42,9 @@ const showDialogVisible = ref(false);
 
 <style scoped lang="scss">
 .match-card {
-    width: 300px;
-    height: 330px;
+    width: 100%;
+    height: 350px;
     padding: 8px;
-    margin: 8px;
     border: 2px dashed #dcdcdc;
     border-radius: 8px;
     display: flex;

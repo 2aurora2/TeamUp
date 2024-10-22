@@ -1,6 +1,8 @@
 import service from "@/http/service.ts";
 import {ResponseResult} from "@/api/type.ts";
 import {
+    BanUserReq, GetAllUserListReq,
+    GetAllUserListRes,
     GetUserInfoByIdReq,
     GetUserInfoByIdRes,
     LoginReq,
@@ -31,10 +33,20 @@ const updateUserInfo = (data: UpdateUserInfoReq) => {
     return service.post<ResponseResult<UpdateUserInfoRes>>('/user/update/info', data);
 }
 
+const getAllUserList = (data: GetAllUserListReq) => {
+    return service.get<ResponseResult<GetAllUserListRes>>('/user/get/all' + urlEncode(data));
+}
+
+const banUser = (data: BanUserReq) => {
+    return service.post<ResponseResult<null>>('/user/ban', data);
+}
+
 export default {
     login,               // 用户登录
     logout,              // 退出登录
     register,            // 用户注册
     getUserInfoById,     // 获取用户信息
     updateUserInfo,      // 更新用户信息
+    getAllUserList,      // 获取所有未被封禁的用户信息
+    banUser,             // 封禁用户
 };

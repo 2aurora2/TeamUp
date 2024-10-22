@@ -40,6 +40,52 @@ const routes = [
         }
     },
     {
+        path: '/post',
+        redirect: () => '/post/create',
+        children: [
+            {
+                path: 'create',
+                name: 'PostCreate',
+                component: () => import('@/views/PostViews/PostCreateView.vue'),
+                meta: {
+                    requireLoginAuth: true
+                }
+            },
+            {
+                path: ':postId(\\d+)',
+                name: 'PostDetails',
+                component: () => import('@/views/PostViews/PostDetailsView.vue'),
+                meta: {
+                    requireLoginAuth: true
+                }
+            },
+            {
+                path: 'edit/:postId(\\d+)',
+                name: 'PostEdit',
+                component: () => import('@/views/PostViews/PostEditView.vue'),
+                meta: {
+                    requireLoginAuth: true
+                }
+            }
+        ]
+    },
+    {
+        path: '/recruit',
+        name: 'RecruitmentLobby',
+        component: () => import('@/views/PostViews/RecruitmentLobbyView.vue'),
+        meta: {
+            requireLoginAuth: true
+        }
+    },
+    {
+        path: '/experience',
+        name: 'ExperienceShare',
+        component: () => import('@/views/PostViews/ExperienceShareView.vue'),
+        meta: {
+            requireLoginAuth: true
+        }
+    },
+    {
         path: '/admin',
         name: 'Administer',
         component: () => import('@/views/BackHomeView.vue'),
@@ -58,6 +104,24 @@ const routes = [
                 path: 'match/manage',
                 name: 'MatchManage',
                 component: () => import('@/views/AdminViews/MatchManageView.vue'),
+                meta: {
+                    requireLoginAuth: true,
+                    requireAdminAuth: true
+                }
+            },
+            {
+                path: 'post/manage',
+                name: 'PostManage',
+                component: () => import('@/views/AdminViews/PostManageView.vue'),
+                meta: {
+                    requireLoginAuth: true,
+                    requireAdminAuth: true
+                }
+            },
+            {
+                path: 'user/manage',
+                name: 'UserManage',
+                component: () => import('@/views/AdminViews/UserManageView.vue'),
                 meta: {
                     requireLoginAuth: true,
                     requireAdminAuth: true

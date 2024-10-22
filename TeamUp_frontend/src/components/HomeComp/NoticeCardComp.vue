@@ -4,8 +4,9 @@
         <p class="big-title">寻找你的竞赛最佳拍档</p>
         <p class="desc">无论是创新创业、学科竞赛还是科研项目，在这里找到志同道合的小伙伴！</p>
         <div class="router-btn row-flex">
-            <div @click="router.push('#')">招募大厅</div>
-            <div @click="router.push('#')">经验分享</div>
+            <div @click="router.push('/recruit')">招募大厅</div>
+            <div @click="router.push('/experience')">经验分享</div>
+            <div @click="router.push('/post/create')">发布帖子</div>
         </div>
     </div>
 </template>
@@ -74,6 +75,15 @@ import router from "@/router";
 
                 &:hover {
                     background-color: #dcdcdc;
+                }
+            }
+
+            &:nth-child(3) {
+                background-color: #2563eb;
+                color: #ffffff;
+
+                &:hover {
+                    background-color: #1e40af;
                 }
             }
         }

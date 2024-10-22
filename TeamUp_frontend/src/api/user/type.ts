@@ -44,3 +44,17 @@ export type UpdateUserInfoReq = {
 export type UpdateUserInfoRes = {
     user: User
 }
+
+export type GetAllUserListReq = {
+    page: number,
+    pageSize: number
+}
+
+export type GetAllUserListRes = {
+    userList: User[],
+    total: number
+}
+
+export type BanUserReq = {
+    userId: number
+}

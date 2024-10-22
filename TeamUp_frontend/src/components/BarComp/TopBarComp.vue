@@ -1,7 +1,7 @@
 <template>
   <el-page-header>
     <template #content>
-      <div class="flex items-center" @click="router.push('/')">
+      <div class="flex items-center" @click="router.replace('/')">
         <el-avatar
             class="mr-3"
             :size="25"

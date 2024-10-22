@@ -6,7 +6,6 @@ const {jwtCheck} = require("../utils/jwt");
 const responseUtil = require("../utils/response");
 const {permissionCheck} = require("../utils/permission");
 const {Authority} = require("../enum");
-const {where} = require("sequelize");
 const {award} = require('../models/init-models')(sequelize)
 
 /**

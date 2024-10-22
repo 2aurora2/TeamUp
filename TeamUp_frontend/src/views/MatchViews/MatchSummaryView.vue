@@ -83,10 +83,13 @@ onMounted(async () => {
 
     .match-cards {
         width: 90%;
-        display: flex;
-        flex-flow: row wrap;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 17%);
+        grid-row-gap: 50px;
+        grid-column-gap: 50px;
+        justify-content: space-evenly;
+        justify-items: center;
         align-items: center;
-        justify-content: center;
     }
 
     p {
