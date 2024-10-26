@@ -5,27 +5,32 @@
             width="500"
     >
         <h2>赛事名称</h2>
-        <p>{{ props.matchItem.title }}</p>
+        <p>{{ props.title }}</p>
         <h2>赛事官网</h2>
         <p>
-            <el-link :href="props.matchItem.link" type="primary">官网直达 >></el-link>
+            <el-link :href="props.link" type="primary">官网直达 >></el-link>
         </p>
         <h2>标签</h2>
         <div class="tags">
-            <el-tag v-for="(item,index) in props.matchItem.tagList" :key="index" style="margin-right: 8px">{{ item }}</el-tag>
+            <el-tag v-for="(item,index) in props.tagList" :key="index" style="margin-right: 8px">{{
+                    item
+                }}
+            </el-tag>
         </div>
         <h2>简要介绍</h2>
-        <p>{{ props.matchItem.description }}</p>
+        <p>{{ props.description }}</p>
     </el-dialog>
 </template>
 
 <script setup lang="ts">
-import {MatchItem} from "@/interface/match.ts";
-
 const showDialogVisible = defineModel('showDialogVisible');
-const props = defineProps<{
-    matchItem: MatchItem;
-}>();
+const props = defineProps({
+    title: String,
+    month: Number,
+    description: String,
+    link: String,
+    tagList: () => []
+})
 </script>
 
 <style scoped lang="scss">
