@@ -21,6 +21,7 @@ npm install
 ```
 
 4. 建立数据库对应的SQL文件在后端项目文件夹的 db 文件夹的 sql 文件中
+4. 需要在 TeamUp_backend\public\ 下新建 images 文件夹
 
 ### 项目启动
 
